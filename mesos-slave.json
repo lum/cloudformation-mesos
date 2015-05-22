@@ -322,6 +322,12 @@
               " --stack ", { "Ref" : "AWS::StackName" },
               " --region ", { "Ref" : "AWS::Region" }, "\n",
 
+          "# Set Hostname\n",
+          "HOSTNAME=`ec2metadata --public-hostname`\n",
+          "sed -i \"s/127.0.0.1 localhost/127.0.0.1 localhost $HOSTNAME/g\" /etc/hosts\n",
+          "hostname $HOSTNAME\n",
+          "echo $HOSTNAME > /etc/hostname\n",
+
           "#EOF"
         ]]}}
       }
